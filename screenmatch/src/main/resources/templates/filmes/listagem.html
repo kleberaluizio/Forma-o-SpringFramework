@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Lista de filme</title>
+</head>
+<body>
+
+<div layout:fragment="conteudo">
+    <h1>Lista de filme</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>NOME</th>
+            <th>DURACAO</th>
+            <th>ANO DE LANCAMENTO</th>
+            <th>GENERO</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="filme : ${lista}">
+            <td th:text="${filme.nome}"></td>
+            <td th:text="${filme.duracao}"></td>
+            <td th:text="${filme.ano}"></td>
+            <td th:text="${filme.genero}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+<!--each, para cada item, vai atualizar  ${aqui vai a variavel -->
