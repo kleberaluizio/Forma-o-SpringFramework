@@ -10,6 +10,7 @@
 
 <div layout:fragment="conteudo">
     <h1>Lista de filme</h1>
+    <a href="filmes/formulario">Novo</a>
     <table>
         <thead>
         <tr>
@@ -17,7 +18,7 @@
             <th>DURACAO</th>
             <th>ANO DE LANCAMENTO</th>
             <th>GENERO</th>
-
+            <th>ACOES</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,15 @@
             <td th:text="${filme.duracaoEmMinutos}"></td>
             <td th:text="${filme.anoLancamento}"></td>
             <td th:text="${filme.genero}"></td>
+            <td>
+                <a th:href="@{filmes/formulario?id={id}(id=${filme.id})}">Editar</a>
+
+                <form action="/filmes" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${filme.id}">
+                    <input type="submit" value="excluir">
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -34,3 +44,4 @@
 </body>
 </html>
 <!--each, para cada item, vai atualizar  ${aqui vai a variavel -->
+<!-- <input type="hidden" name="_method" value="delete">, envia o DELETE -->

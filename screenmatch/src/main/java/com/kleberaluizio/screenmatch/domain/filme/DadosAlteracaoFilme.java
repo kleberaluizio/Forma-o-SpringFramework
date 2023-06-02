@@ -1,12 +1,10 @@
 package com.kleberaluizio.screenmatch.domain.filme;
 
-// Os atributos precisam ter o mesmo nome que esta nos inputs, atributo name dos formularios
-public record DadosCadastroFilme(
-
+public record DadosAlteracaoFilme(
+        Long id,
         String nome,
         Integer duracao,
         Integer ano,
         String genero
 ) {
-
 }
