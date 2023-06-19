@@ -1,0 +1,1 @@
+ALTER TABLE patients ADD COLUMN cpf varchar(14) not null unique AFTER email;
