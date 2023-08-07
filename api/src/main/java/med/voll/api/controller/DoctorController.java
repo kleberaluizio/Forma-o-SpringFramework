@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/doctor")
+@RequestMapping("/doctors")
 public class DoctorController {
 
     @Autowired
@@ -38,6 +38,7 @@ public class DoctorController {
     @PutMapping
     @Transactional
     public ResponseEntity updateDoctor(@RequestBody @Valid DoctorUpdateData data){
+        System.out.println(data.id());
         Doctor doc = repository.getReferenceById(data.id());
         doc.udpateInfo(data);
         return ResponseEntity.ok(new DoctorDetailData(doc));
