@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.address.Address;
 
-@Entity(name = "Patient")
-@Table(name= "patients")
+@Entity(name = "patient")
+@Table(name = "patient")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,18 +20,38 @@ public class Patient {
     private Long id;
     private String name;
     private String email;
+    private String phonenumber;
     private String cpf;
-    private String phone;
-
     @Embedded
     private Address address;
+    private Boolean active;
 
 
-    public Patient(PatientRegisterData patientRegisterData) {
-        this.name = patientRegisterData.name();
-        this.email = patientRegisterData.email();
-        this.cpf = patientRegisterData.cpf();
-        this.phone = patientRegisterData.phone();
-        this.address = new Address(patientRegisterData.address());
+    public Patient(PatientRegisterData data){
+        this.active = true;
+        this.name = data.name();
+        this.email = data.email();
+        this.cpf = data.cpf();
+        this.phonenumber = data.phonenumber();
+        this.address = new Address(data.address());
+    }
+
+    public void udpateInfo(PatientUpdateData data) {
+        if(data.name() != null) {
+            this.name = data.name();
+        }
+        if(data.phonenumber() != null){
+            this.phonenumber = data.phonenumber();
+        }
+        if (data.address() != null){
+            this.address.updateInfo(data.address());
+        }
+        if(data.email() != null){
+            this.email = data.email();
+        }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }

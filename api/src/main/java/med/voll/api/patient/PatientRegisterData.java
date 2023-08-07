@@ -17,7 +17,7 @@ public record PatientRegisterData (
         @NotBlank
         String cpf,
         @NotBlank
-        String phone,
+        String phonenumber,
         @NotNull
         @Valid
         AddressRegisterData address

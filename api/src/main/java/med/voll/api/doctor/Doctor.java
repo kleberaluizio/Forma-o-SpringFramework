@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.address.Address;
-import med.voll.api.address.AddressRegisterData;
 
 @Entity(name = "Doctor")
 @Table(name = "doctors")
@@ -23,6 +22,7 @@ public class Doctor {
     private String email;
     private String phone;
     private String crm;
+    private Boolean active;
 
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
@@ -31,6 +31,7 @@ public class Doctor {
     private Address address;
 
     public Doctor(DoctorRegisterData doctorRegisterData) {
+        this.active = true;
         this.name = doctorRegisterData.name();
         this.email = doctorRegisterData.email();
         this.phone = doctorRegisterData.phone();
@@ -38,4 +39,20 @@ public class Doctor {
         this.specialty = doctorRegisterData.specialty();
         this.address = new Address(doctorRegisterData.address());
     }
+    public void udpateInfo(DoctorUpdateData data) {
+        if(data.name() != null) {
+            this.name = data.name();
+        }
+        if(data.phonenumber() != null){
+            this.phone = data.phonenumber();
+        }
+        if (data.address() != null){
+            this.address.updateInfo(data.address());
+        }
+    }
+
+    public void delete() {
+        this.active = false;
+    }
 }
+

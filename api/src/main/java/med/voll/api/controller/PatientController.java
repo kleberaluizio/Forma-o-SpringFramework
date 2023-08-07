@@ -1,27 +1,44 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.patient.Patient;
-import med.voll.api.patient.PatientRegisterData;
-import med.voll.api.patient.PatientRepository;
+import med.voll.api.patient.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("patients")
+@RequestMapping("/patient")
 public class PatientController {
 
     @Autowired
-    private PatientRepository patientRepository;
+    private PatientRepository repository;
 
     @PostMapping
     @Transactional
-    public void registerPatient(@RequestBody @Valid PatientRegisterData patientRegisterData){
-        var patient = new Patient(patientRegisterData);
-        patientRepository.save(patient);
+    public void registerPatients(@RequestBody @Valid PatientRegisterData data) {
+        repository.save(new Patient(data));
+    }
+
+    @GetMapping
+    public Page<PatientList> getAll(@PageableDefault(sort={"name"}, size=10) Pageable pagination){
+        return repository.findAllByActiveTrue(pagination).map(PatientList::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void updatePatient(@RequestBody @Valid PatientUpdateData data) {
+        Patient pat = repository.getReferenceById(data.id());
+        pat.udpateInfo(data);
+    }
+    @DeleteMapping
+    @Transactional
+    @RequestMapping("/{id}")
+    public void deletePatient(@PathVariable Long id){
+        Patient pat = repository.getReferenceById(id);
+        pat.delete();
     }
 }
+

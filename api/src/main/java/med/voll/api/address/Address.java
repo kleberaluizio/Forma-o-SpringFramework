@@ -28,4 +28,28 @@ public class Address {
         this.extra = address.extra();
         this.number = address.number();
     }
+
+    public void updateInfo(AddressRegisterData data) {
+        if (data.street() != null) {
+            this.street = data.street();
+        }
+        if(data.state() != null) {
+            this.state = data.state();
+        }
+        if(data.cep() != null) {
+            this.cep = data.cep();
+        }
+        if(data.city() != null) {
+            this.city = data.city();
+        }
+        if(data.number() != null) {
+            this.number = data.number();
+        }
+        if(data.neighbourhood() != null) {
+            this.neighbourhood = data.neighbourhood();
+        }
+        if(data.extra() != null) {
+            this.extra = data.extra();
+        }
+    }
 }
