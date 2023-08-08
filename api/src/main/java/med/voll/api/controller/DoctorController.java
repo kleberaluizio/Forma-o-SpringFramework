@@ -1,7 +1,7 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.doctor.*;
+import med.voll.api.domain.doctor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,23 +29,28 @@ public class DoctorController {
     }
 
     @GetMapping
-    //@RequestMapping("/list")
     public ResponseEntity<Page<DoctorList>> getAll(@PageableDefault(size=10, sort={"name"}) Pageable pagination){
         var page = repository.findAllByActiveTrue(pagination).map(DoctorList::new);
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity detailDoctor(@PathVariable Long id){
+        var doc = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DoctorDetailData(doc));
+
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity updateDoctor(@RequestBody @Valid DoctorUpdateData data){
-        System.out.println(data.id());
-        Doctor doc = repository.getReferenceById(data.id());
+        var doc = repository.getReferenceById(data.id());
         doc.udpateInfo(data);
         return ResponseEntity.ok(new DoctorDetailData(doc));
     }
-    @DeleteMapping
+
+    @DeleteMapping("/{id}")
     @Transactional
-    @RequestMapping("/{id}")
     public ResponseEntity deleteDoctor(@PathVariable Long id){
         Doctor doc = repository.getReferenceById(id);
         doc.delete();
