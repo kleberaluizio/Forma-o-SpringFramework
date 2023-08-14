@@ -15,11 +15,14 @@ public class UserAuthenticationController {
     @Autowired
     private AuthenticationManager manager;
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity executeLogin(@RequestBody @Valid UserAuthenticationData userData){
         var token = new UsernamePasswordAuthenticationToken(userData.login(),userData.password());
         var authentication = manager.authenticate(token);
+
         return ResponseEntity.ok().build();
     }
+
+
 
 }
