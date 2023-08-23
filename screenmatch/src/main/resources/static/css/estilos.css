@@ -186,7 +186,7 @@ td a {
 }
 
 td > form {
-    display: inline-grid;
+    display: flex;
 }
 
 /* FORM */
