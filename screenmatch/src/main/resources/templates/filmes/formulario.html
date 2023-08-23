@@ -10,6 +10,7 @@
 <div layout:fragment="conteudo">
 
     <h1>Cadastro de filme</h1>
+    <a href="http://localhost:8080/filmes">Acessar lista de filmes</a>
     <form method="post" action="/filmes">
 
         <input type="hidden" name="_method" value="put" th:if="${filme != null}">
