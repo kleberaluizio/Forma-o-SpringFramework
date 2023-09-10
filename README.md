@@ -16,7 +16,7 @@ Este projeto é um aplicativo web de gerenciamento de filmes desenvolvido em Jav
 * MySQL
 * HTML e CSS
 
-## api [em andamento]
+## api [em andamento - Implementando Security]
 
 - Este projeto é um aplicativo de gestão de consultas médicas desenvolvido utilizando o Spring Framework, MySQL e outras tecnologias relacionadas. O aplicativo é voltado para uma clínica médica fictícia chamada Voll.med e oferece funcionalidades completas para o cadastro de médicos e pacientes, além do agendamento e cancelamento de consultas. Não foi elaborada a interface gráfica desse projeto.
 
