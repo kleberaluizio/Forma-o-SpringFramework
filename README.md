@@ -28,5 +28,15 @@ Este projeto é um aplicativo web de gerenciamento de filmes desenvolvido em Jav
 * Flyway
 * MySQL
 
+## OAuth [em andamento]
+
+- Este projeto tem como objetivo estudar os principios de implementação do OAuth 2.0.
+
+### Tecnologias Utilizadas
+
+* Java 17
+* Spring Framework (Spring Boot, Spring MVC, Lombok)
+* Maven
+
 
 
